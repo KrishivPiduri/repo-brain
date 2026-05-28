@@ -1,0 +1,41 @@
+# Personal settings (may contain API key)
+config.py
+
+# Generated output
+context.md
+context_*.md
+
+# Cloned repos
+repos/
+
+# Archive
+archive/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Generated artifacts from v1
+*.db
+*.pdf
+codebase_audit_report*.json
+consolidation_playbook*.json
+database_export.json
+temp_audit_report.html
+refactor_scaffold.sh
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db

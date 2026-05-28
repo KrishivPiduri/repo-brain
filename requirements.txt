@@ -1,0 +1,9 @@
+openai>=1.0.0
+tree-sitter>=0.21.0
+tree-sitter-languages>=1.10.0
+
+# Uncomment if you use Claude models (claude-* or anthropic/*)
+# anthropic>=0.20.0
+
+# Optional: for the MCP server (mcp_server.py)
+# mcp>=1.0.0
