@@ -44,16 +44,54 @@ def _step(label: str):
 # Main
 # ---------------------------------------------------------------------------
 
+_INTERACTIVE = False
+
+
+def _interactive_mode():
+    """Guided prompts used when the exe is double-clicked with no arguments."""
+    global _INTERACTIVE
+    _INTERACTIVE = True
+    print(bold("repo-brain") + "  —  map a codebase for LLM context\n")
+
+    source = input("  Repo path or GitHub URL: ").strip().strip('"')
+    if not source:
+        print("Nothing entered. Exiting.")
+        input("\nPress Enter to close...")
+        sys.exit(0)
+
+    api_key = input("  API key (Enter to skip — static output only): ").strip()
+
+    no_llm = not api_key
+    model = "gpt-4o-mini"
+    if api_key:
+        m = input(f"  Model [{model}]: ").strip()
+        if m:
+            model = m
+
+    output = input("  Output file [context.md]: ").strip()
+    if not output:
+        output = "context.md"
+
+    sys.argv = [sys.argv[0], source, "--output", output]
+    if no_llm:
+        sys.argv.append("--no-llm")
+    else:
+        sys.argv += ["--model", model, "--api-key", api_key]
+
+
 def main():
+    if len(sys.argv) == 1:
+        _interactive_mode()
+
     parser = argparse.ArgumentParser(
         description="Map a codebase into a single markdown context file for LLMs.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  python main.py /path/to/repo
-  python main.py /path/to/repo -o context.md
-  python main.py https://github.com/user/repo --name MyProject
-  python main.py /path/to/repo --no-llm
+  repo-brain /path/to/repo
+  repo-brain /path/to/repo -o context.md
+  repo-brain https://github.com/user/repo --name MyProject
+  repo-brain /path/to/repo --no-llm
         """,
     )
     parser.add_argument("source", help="Local repo path or git URL")
@@ -172,6 +210,9 @@ Examples:
     pct        = (1 - out_tokens / max(raw_tokens, 1)) * 100
 
     _print_summary(project_name, len(files), raw_tokens, out_tokens, pct, n_rels, out)
+
+    if _INTERACTIVE:
+        input("\nPress Enter to close...")
 
 
 def _print_summary(name, n_files, raw_tok, out_tok, pct, n_rels, out_path):
