@@ -5,7 +5,7 @@
 #   Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned
 $ErrorActionPreference = "Stop"
 
-$GithubRepo = "https://github.com/YOUR_USERNAME/repo-brain"
+$GithubRepo = "https://github.com/KrishivPiduri/repo-brain"
 $InstallDir = "$env:USERPROFILE\.repo-brain"
 $BinDir     = "$env:USERPROFILE\.local\bin"
 $ZipPath    = "$InstallDir\repo-brain.zip"
@@ -75,3 +75,4 @@ Write-Host "    repo-brain C:\path\to\your\repo"
 Write-Host "    repo-brain C:\path\to\your\repo --model claude-3-5-haiku-20241022"
 Write-Host "    repo-brain C:\path\to\your\repo --no-llm"
 Write-Host ""
+Read-Host "Press Enter to exit"

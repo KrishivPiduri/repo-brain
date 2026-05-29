@@ -3,7 +3,7 @@
 # Usage: curl -fsSL <url-to-this-file> | bash
 set -euo pipefail
 
-GITHUB_REPO="https://github.com/YOUR_USERNAME/repo-brain"
+GITHUB_REPO="https://github.com/KrishivPiduri/repo-brain"
 INSTALL_DIR="$HOME/.repo-brain"
 BIN_DIR="$HOME/.local/bin"
 RELEASE_ZIP="$INSTALL_DIR/repo-brain.zip"
